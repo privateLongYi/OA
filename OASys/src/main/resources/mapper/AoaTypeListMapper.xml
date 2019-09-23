@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hr.mapper.AoaTypeListMapper">
+
+  <resultMap id="BaseResultMap" type="com.hr.entity.AoaTypeList">
+    <id column="type_id" jdbcType="BIGINT" property="typeId" />
+    <result column="type_color" jdbcType="VARCHAR" property="typeColor" />
+    <result column="type_model" jdbcType="VARCHAR" property="typeModel" />
+    <result column="type_name" jdbcType="VARCHAR" property="typeName" />
+    <result column="sort_value" jdbcType="INTEGER" property="sortValue" />
+  </resultMap>
+
+  <!-- 根据模块或者类型分页查询系统类型表 -->
+  <select id="queryTypeListByModelOrName" resultMap="BaseResultMap">
+    SELECT type_id, type_color, type_model, type_name, sort_value FROM
+     aoa_type_list
+     <where>
+       <if test="keyword != null and keyword != ''">
+         type_model LIKE '%${keyword}%' OR type_name LIKE '%${keyword}%'
+       </if>
+     </where>
+    LIMIT #{page}, #{count}
+  </select>
+
+</mapper>
