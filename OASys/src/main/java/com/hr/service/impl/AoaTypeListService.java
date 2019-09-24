@@ -17,4 +17,9 @@ public class AoaTypeListService implements IAoaTypeListService {
     public List<com.hr.entity.AoaTypeList> queryTypeListByModelOrName(Integer page, Integer count, String keyword) {
         return aoaTypeListMapper.queryTypeListByModelOrName(page, count, keyword);
     }
+
+    @Override
+    public Integer queryTotalByModelOrName(String keyword) {
+        return aoaTypeListMapper.queryTotalByModelOrName(keyword);
+    }
 }

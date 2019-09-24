@@ -6,11 +6,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.ResponseBody;
 
+import javax.servlet.http.HttpSession;
 import java.util.List;
 
-@RestController
+@Controller
 @RequestMapping("typeList")
 public class AoaTypeListController {
 
@@ -18,10 +19,15 @@ public class AoaTypeListController {
     private IAoaTypeListService iAoaTypeListService;
 
     @RequestMapping("queryTypeListByModelOrName")
-    public List<AoaTypeList> queryTypeListByModelOrName(ModelMap map, Integer page, Integer count, String keyword){
-        List<AoaTypeList> list = iAoaTypeListService.queryTypeListByModelOrName(page, count, keyword);
-        map.addAttribute("list",list);
-        return list;
+    @ResponseBody
+    public List<AoaTypeList> queryTypeListByModelOrName(Integer page, Integer count, String keyword){
+        return iAoaTypeListService.queryTypeListByModelOrName(page*count, count, keyword);
+    }
+
+    @RequestMapping("queryTotalByModelOrName")
+    @ResponseBody
+    public Integer queryTotalByModelOrName(String keyword){
+        return iAoaTypeListService.queryTotalByModelOrName(keyword);
     }
 
 }

@@ -12,4 +12,7 @@ public interface IAoaTypeListService {
                                                  @Param("count") Integer count,
                                                  @Param("keyword") String keyword);
 
+    //根据条件查询总页数
+    Integer queryTotalByModelOrName(String keyword);
+
 }

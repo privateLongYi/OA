@@ -19,7 +19,17 @@
          type_model LIKE '%${keyword}%' OR type_name LIKE '%${keyword}%'
        </if>
      </where>
-    LIMIT #{page}, #{count}
+    ORDER BY sort_value LIMIT #{page}, #{count}
+  </select>
+
+  <!-- 根据条件查询总页数 -->
+  <select id="queryTotalByModelOrName" resultType="java.lang.Integer">
+    SELECT COUNT(*) from aoa_type_list
+    <where>
+      <if test="keyword != null and keyword != ''">
+        type_model LIKE '%${keyword}%'
+      </if>
+    </where>
   </select>
 
 </mapper>
