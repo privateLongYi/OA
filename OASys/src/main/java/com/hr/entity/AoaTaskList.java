@@ -33,6 +33,26 @@ public class AoaTaskList {
 
     private String reciverlist;
 
+    //查询发布任务时需要的用户名和部门名
+    private String userName;
+    private String deptName;
+
+    public String getUserName() {
+        return userName;
+    }
+
+    public void setUserName(String userName) {
+        this.userName = userName;
+    }
+
+    public String getDeptName() {
+        return deptName;
+    }
+
+    public void setDeptName(String deptName) {
+        this.deptName = deptName;
+    }
+
     public AoaTaskList() {
     }
 
