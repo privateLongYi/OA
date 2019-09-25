@@ -1,9 +1,12 @@
-
-<link rel="stylesheet" href="../../../static/bootstrap/css/bootstrap.min.css" />
-<script type="text/javascript" src="../../../static/easyui/jquery.min.js"></script>
-<script type="text/javascript" src="../../../static/bootstrap/js/bootstrap.min.js"></script>
-<link rel="stylesheet" type="text/css" href="../../../static/css/common/box.css" />
-<link rel="stylesheet" type="text/css" href="../../../static/css/common/checkbox.css" />
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http:/www.thymeleaf.org">
+<head>
+	<meta charset="UTF-8">
+<link rel="stylesheet" href="../../bootstrap/css/bootstrap.min.css" />
+<script type="text/javascript" src="../../easyui/jquery.min.js"></script>
+<script type="text/javascript" src="../../bootstrap/js/bootstrap.min.js"></script>
+<link rel="stylesheet" type="text/css" href="../../css/common/box.css" />
+<link rel="stylesheet" type="text/css" href="../../css/common/checkbox.css" />
 
 <style type="text/css">
 a {
@@ -35,6 +38,8 @@ a:hover {
 	cursor: pointer;
 }
 </style>
+</head>
+<body>
 <div class="row" style="padding-top: 10px;">
 	<div class="col-md-2">
 		<h1 style="font-size: 24px; margin: 0;" class="">任务管理</h1>
@@ -68,58 +73,8 @@ a:hover {
 	</div>
 	<!--盒子身体-->
 	<div class="box-body no-padding">
-		<div class="table-responsive">
-			<table class="table table-hover table-striped">
-				<thead>
-					<tr>
-						<th scope="col" class="co commen ">类型<span class="block"></span></th>
-						<th scope="col">标题</th>
-						<th scope="col" class="co commen ">发布时间<span class="block"></span></th>
-						<th scope="col">发布人</th>
-						<th scope="col">部门</th>
-						<th scope="col" class="co commen ">状态<span class="block"></span></th>
-						<th>置顶</th>
-						<th scope="col">操作</th>
-					</tr>
-				</thead>
-				<tbody>
-										<tr>
-						<td><span>公事</span></td>
-						<td><span>统计报表</span></td>
-						<td><span>2019-1-10 11:56:24</span></td>
-						<td><span>小李父斯基</span></td>
-						<td><span>研发部</span></td>
-						<td><span class="label label-primary">进行中</span></td>
-							<td> <span class="labels"><label><input type="checkbox" name="top" class="val" checked disabled><i>✓</i></label></span></td>
-						<td><a  href="taskedit.html?id=51"
-							class="label xiugai"><span
-								class="glyphicon glyphicon-edit"></span> 修改</a> 
-								<a href="tasksee.html?id=51" class="label xiugai"><span
-								class="glyphicon glyphicon-search"></span> 查看</a>
-								 <a href="shanchu?id=51" onclick="{return confirm('删除该记录将不能恢复，确定删除吗？');};"
-							class="label shanchu"><span
-								class="glyphicon glyphicon-remove"></span> 删除</a></td>
-					</tr>
-					<tr>
-						<td><span>私事</span></td>
-						<td><span>搞点发票</span></td>
-						<td><span>2019-1-18 1:00:56</span></td>
-						<td><span>小李父斯基</span></td>
-						<td><span>研发部</span></td>
-						<td><span class="label label-warning">新任务</span></td>
-							<td> <span class="labels"><label><input type="checkbox" name="top" class="val" disabled><i>✓</i></label></span></td>
-						<td><a  href="taskedit.html?id=52"
-							class="label xiugai"><span
-								class="glyphicon glyphicon-edit"></span> 修改</a> 
-								<a href="tasksee.html?id=52" class="label xiugai"><span
-								class="glyphicon glyphicon-search"></span> 查看</a>
-								 <a href="shanchu?id=52" onclick="{return confirm('删除该记录将不能恢复，确定删除吗？');};"
-							class="label shanchu"><span
-								class="glyphicon glyphicon-remove"></span> 删除</a></td>
-					</tr>
+		<div class="table-responsive" id="tab">
 
-				</tbody>
-			</table>
 		</div>
 	</div>
 
@@ -251,6 +206,8 @@ a:hover {
 		
 </script>	</div>
 </div>
+</body>
+</html>
 
 
 
