@@ -19,7 +19,42 @@
          type_model LIKE '%${keyword}%' OR type_name LIKE '%${keyword}%'
        </if>
      </where>
-    LIMIT #{page}, #{count}
+    ORDER BY sort_value LIMIT #{page}, #{count}
   </select>
+
+  <!-- 根据条件查询总页数 -->
+  <select id="queryTotalByModelOrName" resultType="java.lang.Integer">
+    SELECT COUNT(*) from aoa_type_list
+    <where>
+      <if test="keyword != null and keyword != ''">
+        type_model LIKE '%${keyword}%'
+      </if>
+    </where>
+  </select>
+
+  <!-- 新增系统类型 -->
+  <insert id="saveAoaTypeList">
+    INSERT INTO aoa_type_list(type_model, type_name, sort_value)
+    VALUES (#{typeModel}, #{typeName}, #{sortValue})
+  </insert>
+
+  <!-- 删除系统类型 -->
+  <delete id="delTypeListByTypeId">
+    DELETE FROM aoa_type_list WHERE type_id = #{typeId}
+  </delete>
+
+  <!-- 根据ID查询系统类型 -->
+  <select id="queryTypeListByTypeId" resultMap="BaseResultMap">
+    SELECT type_id, type_model, type_name, sort_value FROM
+     aoa_type_list WHERE type_id = #{typeId}
+  </select>
+
+  <!-- 根据ID查询系统类型 -->
+  <update id="updTypeListByTypeId">
+    UPDATE aoa_type_list SET type_model = #{typeModel},
+    type_name = #{typeName}, sort_value = #{sortValue}
+    WHERE type_id = #{typeId}
+  </update>
+
 
 </mapper>

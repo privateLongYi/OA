@@ -21,7 +21,10 @@
     INNER JOIN aoa_role_ r ON p.role_id=r.role_id
     INNER JOIN aoa_sys_menu m ON p.menu_id=m.menu_id
     <where>
-      p.is_show=1 AND r.role_id = #{roleId}
+      p.is_show=1
+      <if test="roleId != null">
+        AND r.role_id = #{roleId}
+      </if>
       <if test="parentId != null">
         AND m.parent_id = #{parentId}
       </if>

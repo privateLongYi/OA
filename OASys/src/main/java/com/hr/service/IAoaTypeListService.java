@@ -12,4 +12,19 @@ public interface IAoaTypeListService {
                                                  @Param("count") Integer count,
                                                  @Param("keyword") String keyword);
 
+    //根据条件查询总页数
+    Integer queryTotalByModelOrName(String keyword);
+
+    //新增类型
+    void saveAoaTypeList(AoaTypeList typeList);
+
+    //删除类型
+    void delTypeListByTypeId(Long typeId);
+
+    //根据ID查询类型
+    AoaTypeList queryTypeListByTypeId(Long typeId);
+
+    //根据ID修改类型
+    void updTypeListByTypeId(AoaTypeList typeList);
+
 }
