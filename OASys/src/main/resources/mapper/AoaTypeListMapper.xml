@@ -32,9 +32,29 @@
     </where>
   </select>
 
+  <!-- 新增系统类型 -->
   <insert id="saveAoaTypeList">
     INSERT INTO aoa_type_list(type_model, type_name, sort_value)
     VALUES (#{typeModel}, #{typeName}, #{sortValue})
   </insert>
-  
+
+  <!-- 删除系统类型 -->
+  <delete id="delTypeListByTypeId">
+    DELETE FROM aoa_type_list WHERE type_id = #{typeId}
+  </delete>
+
+  <!-- 根据ID查询系统类型 -->
+  <select id="queryTypeListByTypeId" resultMap="BaseResultMap">
+    SELECT type_id, type_model, type_name, sort_value FROM
+     aoa_type_list WHERE type_id = #{typeId}
+  </select>
+
+  <!-- 根据ID查询系统类型 -->
+  <update id="updTypeListByTypeId">
+    UPDATE aoa_type_list SET type_model = #{typeModel},
+    type_name = #{typeName}, sort_value = #{sortValue}
+    WHERE type_id = #{typeId}
+  </update>
+
+
 </mapper>

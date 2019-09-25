@@ -32,7 +32,7 @@
         <h1 style="font-size: 24px; margin: 0;" class="">类型管理</h1>
     </div>
     <div class="col-md-10 text-right">
-        <a href="../../../static/main.html"><span class="glyphicon glyphicon-home"></span> 首页</a> >
+        <a th:href="@{/main.html}"><span class="glyphicon glyphicon-home"></span> 首页</a> >
         <a disabled="disabled">类型管理</a>
     </div>
 </div>
@@ -44,7 +44,7 @@
             <!--盒子头-->
             <div class="box-header">
                 <h3 class="box-title">
-                    <a href="../../../static/sysmanage/typemanage/typeadd.html" class="label label-success"
+                    <a th:href="@{/sysmanage/typemanage/typeadd.html}" class="label label-success"
                        style="padding: 5px;">
                         <span class="glyphicon glyphicon-plus"></span> 新增
                     </a>
@@ -57,7 +57,7 @@
                         <input type="text" class="form-control input-sm baseKey"
                                placeholder="按名称/模块查找" id="keyword"/>
                         <div class="input-group-btn">
-                            <a href="javascript:search();" class="btn btn-sm btn-default baseKeySubmit"><span
+                            <a href="javascript:search();" style="height: 30px;" class="btn btn-sm btn-default baseKeySubmit"><span
                                     class="glyphicon glyphicon-search"></span></a>
                         </div>
                     </div>

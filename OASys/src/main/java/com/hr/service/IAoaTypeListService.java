@@ -18,4 +18,13 @@ public interface IAoaTypeListService {
     //新增类型
     void saveAoaTypeList(AoaTypeList typeList);
 
+    //删除类型
+    void delTypeListByTypeId(Long typeId);
+
+    //根据ID查询类型
+    AoaTypeList queryTypeListByTypeId(Long typeId);
+
+    //根据ID修改类型
+    void updTypeListByTypeId(AoaTypeList typeList);
+
 }

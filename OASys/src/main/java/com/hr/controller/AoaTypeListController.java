@@ -47,10 +47,51 @@ public class AoaTypeListController {
         return iAoaTypeListService.queryTotalByModelOrName(keyword);
     }
 
+    /**
+     * 新增
+     * @param typeList
+     * @return
+     */
     @RequestMapping("saveAoaTypeList")
     public String saveAoaTypeList(AoaTypeList typeList){
         iAoaTypeListService.saveAoaTypeList(typeList);
-        return "redirect:/sysmanage/typemanage/typemanage.html";
+        return "/sysmanage/typemanage/typemanage";
+    }
+
+    /**
+     * 删除
+     * @param typeId
+     * @return
+     */
+    @RequestMapping("delTypeListByTypeId")
+    public String delTypeListByTypeId(Long typeId){
+        iAoaTypeListService.delTypeListByTypeId(typeId);
+        return "/sysmanage/typemanage/typemanage";
+    }
+
+    /**
+     * 根据ID查询系统类型（去修改）
+     * @param map
+     * @param typeId
+     * @return
+     */
+    @RequestMapping("goUpdate")
+    public String goUpdate(ModelMap map, Long typeId){
+        AoaTypeList typeList = iAoaTypeListService.queryTypeListByTypeId(typeId);
+        map.addAttribute("typeList", typeList);
+        return "/sysmanage/typemanage/typeedit";
+    }
+
+    /**
+     * 根据ID修改系统类型
+     * @param map
+     * @param typeList
+     * @return
+     */
+    @RequestMapping("updTypeListByTypeId")
+    public String updTypeListByTypeId(ModelMap map, AoaTypeList typeList){
+        iAoaTypeListService.updTypeListByTypeId(typeList);
+        return "/sysmanage/typemanage/typemanage";
     }
 
 }

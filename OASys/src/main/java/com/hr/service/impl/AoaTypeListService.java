@@ -28,4 +28,19 @@ public class AoaTypeListService implements IAoaTypeListService {
     public void saveAoaTypeList(AoaTypeList typeList) {
         aoaTypeListMapper.saveAoaTypeList(typeList);
     }
+
+    @Override
+    public void delTypeListByTypeId(Long typeId) {
+        aoaTypeListMapper.delTypeListByTypeId(typeId);
+    }
+
+    @Override
+    public AoaTypeList queryTypeListByTypeId(Long typeId) {
+        return aoaTypeListMapper.queryTypeListByTypeId(typeId);
+    }
+
+    @Override
+    public void updTypeListByTypeId(AoaTypeList typeList) {
+        aoaTypeListMapper.updTypeListByTypeId(typeList);
+    }
 }
