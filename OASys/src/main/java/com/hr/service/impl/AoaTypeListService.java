@@ -1,5 +1,6 @@
 package com.hr.service.impl;
 
+import com.hr.entity.AoaTypeList;
 import com.hr.mapper.AoaTypeListMapper;
 import com.hr.service.IAoaTypeListService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,5 +22,10 @@ public class AoaTypeListService implements IAoaTypeListService {
     @Override
     public Integer queryTotalByModelOrName(String keyword) {
         return aoaTypeListMapper.queryTotalByModelOrName(keyword);
+    }
+
+    @Override
+    public void saveAoaTypeList(AoaTypeList typeList) {
+        aoaTypeListMapper.saveAoaTypeList(typeList);
     }
 }

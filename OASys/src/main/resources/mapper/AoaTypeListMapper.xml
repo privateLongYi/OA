@@ -32,4 +32,9 @@
     </where>
   </select>
 
+  <insert id="saveAoaTypeList">
+    INSERT INTO aoa_type_list(type_model, type_name, sort_value)
+    VALUES (#{typeModel}, #{typeName}, #{sortValue})
+  </insert>
+  
 </mapper>

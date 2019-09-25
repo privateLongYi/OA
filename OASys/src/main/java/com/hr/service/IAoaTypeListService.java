@@ -15,4 +15,7 @@ public interface IAoaTypeListService {
     //根据条件查询总页数
     Integer queryTotalByModelOrName(String keyword);
 
+    //新增类型
+    void saveAoaTypeList(AoaTypeList typeList);
+
 }

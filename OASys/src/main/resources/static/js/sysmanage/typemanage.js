@@ -21,7 +21,7 @@ function query(page, count, keyword) {
     $("#nowPage").val(pg);
 
     $.ajax({
-        url: "../../typeList/queryTypeListByModelOrName",
+        url: "../typeList/queryTypeListByModelOrName",
         data: {page: page, count: count, keyword: keyword},
         async: false,
         success: function (data) {
@@ -74,7 +74,7 @@ function query(page, count, keyword) {
 
     //根据条件查询总页码
     $.ajax({
-        url: "../../typeList/queryTotalByModelOrName",
+        url: "../typeList/queryTotalByModelOrName",
         data: {keyword: keyword},
         async: false,
         success: function (data) {
