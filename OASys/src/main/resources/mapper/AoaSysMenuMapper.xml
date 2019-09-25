@@ -5,14 +5,15 @@
   <resultMap id="BaseResultMap" type="com.hr.entity.AoaSysMenu">
     <id column="menu_id" jdbcType="BIGINT" property="menuId" />
     <result column="is_show" jdbcType="INTEGER" property="isShow" />
-    <result column="menu_grade" jdbcType="INTEGER" property="menuGrade" />
     <result column="menu_icon" jdbcType="VARCHAR" property="menuIcon" />
     <result column="menu_name" jdbcType="VARCHAR" property="menuName" />
     <result column="menu_url" jdbcType="VARCHAR" property="menuUrl" />
     <result column="parent_id" jdbcType="BIGINT" property="parentId" />
     <result column="sort_id" jdbcType="INTEGER" property="sortId" />
+    <result column="menu_grade" jdbcType="VARCHAR" property="menuGrade" />
   </resultMap>
 
+  <!-- 根据角色ID和父级ID查询权限树 -->
   <select id="querySysMenuByRoleId" resultMap="BaseResultMap">
     SELECT r.role_id, r.role_name, m.menu_id, m.menu_icon, m.menu_name,
     m.menu_url, m.parent_id, m.sort_id,
@@ -31,5 +32,27 @@
     </where>
     ORDER BY m.sort_id
   </select>
-  
+
+  <!-- 根据模块或者类型分页查询系统菜单表 -->
+  <select id="querySysMenuByName" resultMap="BaseResultMap">
+    SELECT menu_id, is_show, menu_icon, menu_name, menu_url,
+    parent_id, sort_id, menu_grade FROM aoa_sys_menu
+    <where>
+      <if test="keyword != null and keyword != ''">
+        menu_name LIKE '%${keyword}%'
+      </if>
+    </where>
+    ORDER BY sort_id LIMIT #{page}, #{count}
+  </select>
+
+  <!-- 根据条件查询总页数 -->
+  <select id="queryTotalByName" resultType="java.lang.Integer">
+    SELECT COUNT(*) from aoa_sys_menu
+    <where>
+      <if test="keyword != null and keyword != ''">
+        menu_name LIKE '%${keyword}%'
+      </if>
+    </where>
+  </select>
+
 </mapper>
