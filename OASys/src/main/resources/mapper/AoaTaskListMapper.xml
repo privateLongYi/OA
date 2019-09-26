@@ -18,6 +18,8 @@
     <result column="type_id" jdbcType="BIGINT" property="typeId" />
     <result column="task_push_user_id" jdbcType="BIGINT" property="taskPushUserId" />
     <result column="reciverlist" jdbcType="VARCHAR" property="reciverlist" />
+    <result column="user_name" jdbcType="VARCHAR" property="userName" />
+    <result column="dept_name" jdbcType="VARCHAR" property="deptName" />
   </resultMap>
   <select id="queryTask" resultMap="BaseResultMap">
     select t.type_id,t.title,t.publish_time,u.user_name,d.dept_name,t.status_id,t.is_top
@@ -25,11 +27,22 @@
     aoa_task_list t,aoa_user u,aoa_dept d
     <where>
       <if test="keyword != null and keyword != ''">
-        t.title LIKE '%${keyword}%' OR u.user_name LIKE '%${keyword}%'
+        (t.title LIKE '%${keyword}%' OR u.user_name LIKE '%${keyword}%')
       </if>
       AND task_push_user_id=1 and t.task_push_user_id=u.user_id and u.dept_id=d.dept_id
     </where>
     ORDER BY t.is_top desc , t.publish_time DESC
     LIMIT #{page}, #{count}
+  </select>
+
+  <select id="queryTaskByword" resultType="java.lang.Integer">
+    SELECT COUNT(*) from
+    aoa_task_list t,aoa_user u,aoa_dept d
+    <where>
+      <if test="keyword != null and keyword != ''">
+        (t.title LIKE '%${keyword}%' OR u.user_name LIKE '%${keyword}%')
+      </if>
+      AND task_push_user_id=1 and t.task_push_user_id=u.user_id and u.dept_id=d.dept_id
+    </where>
   </select>
 </mapper>

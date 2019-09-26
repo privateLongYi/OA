@@ -25,4 +25,11 @@ public class AoaTaskListService implements IAoaTaskListService{
     public List<AoaTaskList> queryTask(Integer page, Integer count, String keyword, Long taskPushUserId) {
         return aoaTaskListMapper.queryTask(page,count,keyword,taskPushUserId);
     }
+
+    //根据条件查询总页数
+
+    @Override
+    public Integer queryTaskByword(String keyword) {
+        return aoaTaskListMapper.queryTaskByword(keyword);
+    }
 }
