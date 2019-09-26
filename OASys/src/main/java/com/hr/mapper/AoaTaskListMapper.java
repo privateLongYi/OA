@@ -16,6 +16,9 @@ public interface AoaTaskListMapper {
                                        @Param("keyword") String keyword,
                                        @Param("taskPushUserId") Long taskPushUserId);
 
+    //根据条件查询总页数
+    public Integer queryTaskByword(String keyword);
+
 
 
 }
