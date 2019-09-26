@@ -8,6 +8,7 @@
     <script type="text/javascript" th:src="@{/bootstrap/js/bootstrap.min.js}"></script>
     <link rel="stylesheet" type="text/css" th:href="@{/css/common/box.css}"/>
     <link rel="stylesheet" type="text/css" th:href="@{/css/common/checkbox.css}"/>
+    <script type="text/javascript" th:src="@{/js/sysmanage/menumanage.js}"></script>
     <style type="text/css">
         a {
             color: black;
@@ -25,6 +26,11 @@
             border-top: 1px solid rgba(245, 245, 220, 0.29);
         }
 
+        .txt{
+            width: 30px;
+            height: 20px;
+            border-radius: 5px;
+        }
     </style>
 </head>
 <body>
@@ -45,7 +51,7 @@
             <!--盒子头-->
             <div class="box-header">
                 <h3 class="box-title">
-                    <a th:href="@{saveSysMenu}" class="label label-success"
+                    <a th:href="@{goSave}" class="label label-success"
                        style="padding: 5px;"> <span class="glyphicon glyphicon-plus"></span>
                         新增
                     </a>
@@ -68,39 +74,8 @@
             </div>
             <!--盒子身体-->
             <div class="box-body no-padding thistable">
-                <div class="table-responsive">
-                    <table class="table table-hover">
-                        <tr>
-                            <th scope="col">名称</th>
-                            <th scope="col">图标</th>
-                            <th scope="col">路径</th>
-                            <th scope="col">类型</th>
-                            <th scope="col">排序</th>
-                            <th scope="col">显示</th>
-                            <th scope="col">操作</th>
-                        </tr>
-                        <tr style="background:rgba(255, 235, 59, 0.19);">
-                            <td>系统管理</td>
-                            <td><span class="glyphicon glyphicon-cog"></span></td>
-                            <td><span>##</span></td>
-                            <td><span>父级</span></td>
-                            <td><span>0</span></td>
-                            <td><span class="labels"><label><input type="checkbox" checked
-                                                                   disabled><i>✓</i></label></span></td>
-                            <td><a href="changeSortId?parentid=0&sortid=0&menuid=1&num=1" class="label sheding"><span
-                                    class="glyphicon glyphicon-arrow-up"></span> 上移</a> <a
-                                    href="changeSortId?parentid=0&sortid=0&menuid=1&num=-1" class="label sheding"><span
-                                    class="glyphicon glyphicon-arrow-down"></span> 下移</a> <a
-                                    href="menuedit.html" class="label xiugai"><span
-                                    class="glyphicon glyphicon-edit"></span> 修改</a> <a
-                                    onclick="{return confirm('删除该记录将不能恢复，确定删除吗？');};"
-                                    href="deletethis?id=1" class="label shanchu"><span
-                                    class="glyphicon glyphicon-remove"></span> 删除</a>
-                                <a href="menuadd.html" class="label xinzeng"><span
-                                        class="glyphicon glyphicon-plus"></span> 新增</a>
-                            </td>
-                        </tr>
-                    </table>
+                <div class="table-responsive" id="tab">
+
                 </div>
             </div>
             <!--盒子尾-->

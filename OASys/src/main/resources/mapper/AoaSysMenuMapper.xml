@@ -55,4 +55,35 @@
     </where>
   </select>
 
+  <!-- 查询父级系统菜单 -->
+  <select id="queryParentSysMenu" resultMap="BaseResultMap">
+    SELECT menu_id, is_show, menu_icon, menu_name, menu_url,
+    parent_id, sort_id, menu_grade FROM aoa_sys_menu WHERE parent_id = 0
+  </select>
+
+  <!-- 增加系统菜单 -->
+  <insert id="saveAoaSysMenu">
+    INSERT INTO aoa_sys_menu(is_show, menu_icon, menu_name, menu_url, parent_id,
+    sort_id, menu_grade) VALUES (#{isShow}, #{menuIcon}, #{menuName},
+    #{menuUrl}, #{parentId}, #{sortId}, #{menuGrade})
+  </insert>
+
+  <!-- 根据ID删除系统菜单 -->
+  <delete id="delSysMenuById">
+    DELETE FROM aoa_sys_menu WHERE menu_id = #{menuId}
+  </delete>
+
+  <!-- 根据ID查询系统菜单 -->
+  <select id="querySysMenuById" resultMap="BaseResultMap">
+    SELECT menu_id, is_show, menu_icon, menu_name, menu_url,
+    parent_id, sort_id, menu_grade FROM aoa_sys_menu WHERE menu_id = #{menuId}
+  </select>
+
+  <!-- 根据ID修改系统菜单 -->
+  <update id="updSysMenuById">
+    UPDATE aoa_sys_menu SET isShow = #{isShow}, menuIcon = #{menuIcon},
+    menuName = #{menuName}, menUrl = #{menuUrl},parentId = #{parentId},
+    sortId = #{sortId}, menuGrade = #{menuGrade} WHERE menu_id = #{menuId}
+  </update>
+
 </mapper>

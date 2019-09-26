@@ -5,21 +5,26 @@ import com.hr.mapper.AoaTypeListMapper;
 import com.hr.service.IAoaTypeListService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
 @Service
+@Transactional(propagation = Propagation.REQUIRED)
 public class AoaTypeListService implements IAoaTypeListService {
 
     @Autowired
     private AoaTypeListMapper aoaTypeListMapper;
 
     @Override
+    @Transactional(propagation = Propagation.SUPPORTS)
     public List<com.hr.entity.AoaTypeList> queryTypeListByModelOrName(Integer page, Integer count, String keyword) {
         return aoaTypeListMapper.queryTypeListByModelOrName(page, count, keyword);
     }
 
     @Override
+    @Transactional(propagation = Propagation.SUPPORTS)
     public Integer queryTotalByModelOrName(String keyword) {
         return aoaTypeListMapper.queryTotalByModelOrName(keyword);
     }
@@ -35,6 +40,7 @@ public class AoaTypeListService implements IAoaTypeListService {
     }
 
     @Override
+    @Transactional(propagation = Propagation.SUPPORTS)
     public AoaTypeList queryTypeListByTypeId(Long typeId) {
         return aoaTypeListMapper.queryTypeListByTypeId(typeId);
     }
