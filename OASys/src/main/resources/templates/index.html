@@ -33,6 +33,7 @@ maximum-scale=1, user-scalable=no">
         function changepath(path) {
             $('iframe').attr('src', path);
         }
+
         function changeurl(obj) {
             var path = $(obj).parent().children(":first").val();
             changepath(path);
@@ -184,24 +185,25 @@ maximum-scale=1, user-scalable=no">
                         </div>
                         <div class="panel-group" id="accordion"
                              style="margin-top: 10px; margin-left: -12px;">
-                            <div class="panel panel-default">
-                                <div class="panel-heading" th:each="p, iterStat :${parentlist}">
-                                    <a class="open-menu green-left" th:href=@{#collapse}+${iterStat.index} data-toggle="collapse"
+                            <div class="panel panel-default" th:each="p, iterStat :${parentlist}">
+                                <div class="panel-heading">
+                                    <a class="open-menu green-left" th:href=@{#collapse}+${iterStat.index}
+                                       data-toggle="collapse"
                                        data-parent="#accordion"> <span
                                             th:class="${p.menuIcon}"></span> <span th:text="${p.menuName}"></span> <span
                                             class="glyphicon glyphicon-menu-left pull-right"></span>
                                     </a>
-                                    <div th:id=collapse+${iterStat.index} class="panel-collapse collapse ">
-                                        <ul>
-                                            <li th:each="c, Stat :${childlist}" th:if="${p.menuId == c.parentId}">
-                                                <input type="hidden" th:value="${c.menuUrl}">
-                                                <a href="javascript:void(0);" onclick="changeurl(this);"> <span
-                                                        class="glyphicon glyphicon-record"></span>
-                                                    <span th:text=${c.menuName}></span>
-                                                </a>
-                                            </li>
-                                        </ul>
-                                    </div>
+                                </div>
+                                <div th:id=collapse+${iterStat.index} class="panel-collapse collapse ">
+                                    <ul>
+                                        <li th:each="c, Stat :${childlist}" th:if="${p.menuId == c.parentId}">
+                                            <input type="hidden" th:value="${c.menuUrl}">
+                                            <a href="javascript:void(0);" onclick="changeurl(this);"> <span
+                                                    class="glyphicon glyphicon-record"></span>
+                                                <span th:text=${c.menuName}></span>
+                                            </a>
+                                        </li>
+                                    </ul>
                                 </div>
                             </div>
                         </div>
@@ -247,7 +249,8 @@ maximum-scale=1, user-scalable=no">
                         <li class="dropdown">
                             <!--设置导航栏头像面板-->
                             <a href="#" class="green-none white" data-toggle="dropdown">
-                                <img th:src="@{/images/647cbde6-3fba-4d8c-a50f-1a07f9bee417.jpg}" class="user-image"/> <span>罗密欧</span>
+                                <img th:src="@{/images/647cbde6-3fba-4d8c-a50f-1a07f9bee417.jpg}" class="user-image"/>
+                                <span>罗密欧</span>
                             </a> <!--设置点击按钮弹出用户面板层-->
                             <ul class="dropdown-menu" style="padding:0;">
                                 <li class="user-header green"><img
@@ -382,10 +385,16 @@ maximum-scale=1, user-scalable=no">
                         $("#history").click(function () {
                             num++;
                             if (num % 2 == 0) {
-                                $("#historypanel").css({ /从右边飞入，使用绝对定位来操作
-                                    "width": "230px",
-                                    "right": "-230px"
-                                }).show().animate({
+                                $("#historypanel").css({
+                                /从右边飞入，使用绝对定位来操作
+                                "width"
+                            :
+                                "230px",
+                                    "right"
+                            :
+                                "-230px"
+                            }).
+                                show().animate({
                                     "right": "0"
                                 }, "fast");
                             } else

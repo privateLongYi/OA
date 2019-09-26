@@ -19,4 +19,13 @@ public class AoaSysMenuService implements IAoaSysMenuService {
         return aoaSysMenuMapper.querySysMenuByRoleId(roleId, parentId);
     }
 
+    @Override
+    public List<AoaSysMenu> querySysMenuByName(Integer page, Integer count, String keyword) {
+        return aoaSysMenuMapper.querySysMenuByName(page, count, keyword);
+    }
+
+    @Override
+    public Integer queryTotalByName(String keyword) {
+        return aoaSysMenuMapper.queryTotalByName(keyword);
+    }
 }

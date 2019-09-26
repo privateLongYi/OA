@@ -5,8 +5,6 @@ import java.io.Serializable;
 public class AoaTypeList implements Serializable{
     private Long typeId;
 
-    private String typeColor;
-
     private String typeModel;
 
     private String typeName;
@@ -16,9 +14,8 @@ public class AoaTypeList implements Serializable{
     public AoaTypeList() {
     }
 
-    public AoaTypeList(Long typeId, String typeColor, String typeModel, String typeName, Integer sortValue) {
+    public AoaTypeList(Long typeId, String typeModel, String typeName, Integer sortValue) {
         this.typeId = typeId;
-        this.typeColor = typeColor;
         this.typeModel = typeModel;
         this.typeName = typeName;
         this.sortValue = sortValue;
@@ -28,7 +25,6 @@ public class AoaTypeList implements Serializable{
     public String toString() {
         return "AoaTypeList{" +
                 "typeId=" + typeId +
-                ", typeColor='" + typeColor + '\'' +
                 ", typeModel='" + typeModel + '\'' +
                 ", typeName='" + typeName + '\'' +
                 ", sortValue=" + sortValue +
@@ -41,14 +37,6 @@ public class AoaTypeList implements Serializable{
 
     public void setTypeId(Long typeId) {
         this.typeId = typeId;
-    }
-
-    public String getTypeColor() {
-        return typeColor;
-    }
-
-    public void setTypeColor(String typeColor) {
-        this.typeColor = typeColor == null ? null : typeColor.trim();
     }
 
     public String getTypeModel() {

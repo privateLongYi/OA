@@ -11,4 +11,10 @@ public interface IAoaSysMenuService {
     List<AoaSysMenu> querySysMenuByRoleId(@Param("roleId") Long roleId,
                                           @Param("parentId") Long parentId);
 
+    //根据条件分页查询权限
+    List<AoaSysMenu> querySysMenuByName(Integer page, Integer count, String keyword);
+
+    //根据条件查询总页数
+    Integer queryTotalByName(String keyword);
+
 }
