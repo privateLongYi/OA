@@ -8,14 +8,42 @@
     <result column="role_value" jdbcType="INTEGER" property="roleValue" />
   </resultMap>
 
-  <select id="queryAoaRole" resultMap="BaseResultMap">
-        select role_id,role_name,role_value from aoa_role_
+
+    <!-- 根据模块或者类型分页查询系统类型表 -->
+    <select id="queryAoaRole" resultMap="BaseResultMap">
+            select role_id,role_name,role_value from aoa_role_
+            <where>
+              <if test="keyword != null and keyword != ''">
+                role_name LIKE '%${keyword}%'
+              </if>
+            </where>
+            LIMIT #{page}, #{count}
+    </select>
+    <!--条件查询总页数-->
+    <select id="queryAoaRoleTotal">
+        SELECT COUNT(*) from aoa_role_
         <where>
-          <if test="keyword != null and keyword != ''">
-            type_model LIKE '%${keyword}%' OR type_name LIKE '%${keyword}%'
-          </if>
+            <if test="keyword != null and keyword != ''">
+                role_name LIKE '%${keyword}%'
+            </if>
         </where>
-        LIMIT #{page}, #{count}
-  </select>
+    </select>
+    <!-- 新增系统类型 -->
+    <insert id="saveAoaRole">
+        INSERT INTO aoa_role_(role_name, role_value)
+        VALUES (#{roleName}, #{roleValue})
+    </insert>
+
+    <!-- 删除系统类型 -->
+    <delete id="delAoaRoleByRoleId">
+        DELETE FROM aoa_role_ WHERE role_id = #{roleId}
+    </delete>
+
+    <!-- 根据ID查询菜单权限-->
+    <select id="queryRoleByRoleId" resultMap="BaseResultMap">
+       SELECT m.menu_id,m.menu_name,m.menu_url,l.is_show from aoa_sys_menu m LEFT JOIN aoa_role_power_list l ON
+        m.menu_id = l.menu_id LEFT JOIN aoa_role_ r ON
+        l.role_id = r.role_id WHERE r.role_id = {roleId}
+    </select>
 
 </mapper>
