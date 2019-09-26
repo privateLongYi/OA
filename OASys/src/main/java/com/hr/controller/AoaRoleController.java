@@ -42,6 +42,12 @@ public class AoaRoleController {
         return aoaRoleService.queryAoaRoleTotal(keyword);
     }
 
+    @RequestMapping("delRoleByRoleId")
+    @ResponseBody
+    public void delRoleByRoleId(Long roleId){
+        aoaRoleService.delRoleByRoleId(roleId);
+    }
+
 
 
 

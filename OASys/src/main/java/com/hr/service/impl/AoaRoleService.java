@@ -26,13 +26,13 @@ public class AoaRoleService implements IAoaRoleService {
     }
 
     @Override
-    public void saveAoaTypeList(AoaRole aoaRole) {
-        aoaRoleMapper.saveAoaTypeList(aoaRole);
+    public void saveAoaRole(AoaRole aoaRole) {
+        aoaRoleMapper.saveAoaRole(aoaRole);
     }
 
     @Override
-    public void delTypeListByRoleId(Long roleId) {
-        aoaRoleMapper.delTypeListByRoleId(roleId);
+    public void delRoleByRoleId(Long roleId) {
+        aoaRoleMapper.delRoleByRoleId(roleId);
     }
 
     @Override

@@ -32,13 +32,13 @@ public interface AoaRoleMapper {
      * 添加角色
      * @param aoaRole
      */
-    void saveAoaTypeList(AoaRole aoaRole);
+    void saveAoaRole(AoaRole aoaRole);
 
     /**
      * 根据id删除
      * @param roleId
      */
-    void delTypeListByRoleId(Long roleId);
+    void delRoleByRoleId(Long roleId);
 
     /**
      *根据ID查询菜单权限
