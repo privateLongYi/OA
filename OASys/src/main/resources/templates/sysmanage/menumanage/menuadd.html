@@ -32,6 +32,13 @@
                 $("#isShow").val("0");
             }
         }
+        function changeGrade() {
+            if ($("#parentId").val() == 0){
+                $("#menuGrade").val("父级");
+            } else {
+                $("#menuGrade").val("子级菜单栏");
+            }
+        }
     </script>
 </head>
 <body>
@@ -77,7 +84,7 @@
                                 <label class="control-label"><span>图标</span> <a href="http://v3.bootcss.com/components/"
                                                                                 target="_blank" title="图标参考"><span
                                         class="glyphicon glyphicon-list-alt"></span></a></label>
-                                <input class="form-control" value="glyphicon-record" name="menuIcon"/>
+                                <input class="form-control" value="glyphicon glyphicon-record" name="menuIcon"/>
                             </div>
                             <div class="col-md-6 form-group">
                                 <label class="control-label"><span>路径</span></label>
@@ -89,8 +96,11 @@
                             </div>
                             <div class="col-md-6 form-group">
                                 <label class="control-label"><span>父级</span></label>
-                                <select class="form-control" name="parentId">
-                                    <option th:each="m:${list}" th:value="${m.menuId}" th:text="${m.menuName}"></option>
+                                <input type="hidden" id="menuGrade" name="menuGrade" value="父级" />
+                                <select class="form-control" id="parentId" name="parentId" onchange="changeGrade()">
+                                    <option value="0">--请选择--</option>
+                                    <option th:each="m:${list}" th:value="${m.menuId}"
+                                            th:text="${m.menuName}" th:selected="${m.menuId == menuId}" ></option>
                                 </select>
                             </div>
                             <div class="col-md-6 form-group">

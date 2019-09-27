@@ -81,9 +81,9 @@
 
   <!-- 根据ID修改系统菜单 -->
   <update id="updSysMenuById">
-    UPDATE aoa_sys_menu SET isShow = #{isShow}, menuIcon = #{menuIcon},
-    menuName = #{menuName}, menUrl = #{menuUrl},parentId = #{parentId},
-    sortId = #{sortId}, menuGrade = #{menuGrade} WHERE menu_id = #{menuId}
+    UPDATE aoa_sys_menu SET is_show = #{isShow}, menu_icon = #{menuIcon},
+    menu_name = #{menuName}, menu_url = #{menuUrl}, parent_id = #{parentId},
+    sort_id = #{sortId}, menu_grade = #{menuGrade} WHERE menu_id = #{menuId}
   </update>
 
 </mapper>

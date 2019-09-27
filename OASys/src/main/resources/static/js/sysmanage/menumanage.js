@@ -57,12 +57,12 @@ function query(page, count, keyword) {
                         "<span class='glyphicon glyphicon-arrow-up'></span> 上移</a> " +
                         "<a href='changeSortId?parentid=0&sortid=0&menuid=1&num=-1' class='label sheding'>" +
                         "<span class='glyphicon glyphicon-arrow-down'></span> 下移</a> " +
-                        "<a href='menuedit.html' class='label xiugai'>" +
+                        "<a href='querySysMenuById?menuId=" + data[i].menuId + "' class='label xiugai'>" +
                         "<span class='glyphicon glyphicon-edit'></span> 修改</a> " +
                         "<a href='javascript:del(" + data[i].menuId + ");' class='label shanchu'>" +
                         "<span class='glyphicon glyphicon-remove'></span> 删除</a>";
                     if (data[i].parentId == 0) {
-                        d += "<a href='menuadd.html' class='label xinzeng'>" +
+                        d += "<a href='goSave?menuId=" + data[i].menuId + "' class='label xinzeng'>" +
                             "<span class='glyphicon glyphicon-plus'></span> 新增</a>";
                     }
                     d += "</td></tr>"
@@ -179,7 +179,7 @@ function sel() {
 //删除
 function del(id) {
     if (confirm("确认删除吗？删除的数据将不能再恢复！")){
-        window.location.href="delTypeListByTypeId?typeId="+id;
+        window.location.href="delSysMenuById?menuId="+id;
     }
 }
 

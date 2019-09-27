@@ -52,9 +52,10 @@ public class AoaSysMenuController {
      * @return
      */
     @RequestMapping("goSave")
-    public String goSave(ModelMap map){
+    public String goSave(ModelMap map, Integer menuId){
         List<AoaSysMenu> list =  iAoaSysMenuService.queryParentSysMenu();
         map.addAttribute("list", list);
+        map.addAttribute("menuId",menuId);
         return "/sysmanage/menumanage/menuadd";
     }
 
@@ -70,14 +71,27 @@ public class AoaSysMenuController {
     }
 
     /**
+     * 根据ID删除系统菜单
+     * @param menuId
+     * @return
+     */
+    @RequestMapping("delSysMenuById")
+    public String delSysMenuById(Long menuId){
+        iAoaSysMenuService.delSysMenuById(menuId);
+        return "/sysmanage/menumanage/menumanage";
+    }
+
+    /**
      * 根据ID查询系统菜单
      * @param map
      * @param menuId
      * @return
      */
-    @RequestMapping("querysysMenuById")
-    public String querysysMenuById(ModelMap map, Long menuId){
-        AoaSysMenu sysMenu =  iAoaSysMenuService.querysysMenuById(menuId);
+    @RequestMapping("querySysMenuById")
+    public String querySysMenuById(ModelMap map, Long menuId){
+        AoaSysMenu sysMenu =  iAoaSysMenuService.querySysMenuById(menuId);
+        List<AoaSysMenu> list =  iAoaSysMenuService.queryParentSysMenu();
+        map.addAttribute("list", list);
         map.addAttribute("sysMenu", sysMenu);
         return "/sysmanage/menumanage/menuedit";
     }
@@ -87,9 +101,9 @@ public class AoaSysMenuController {
      * @param sysMenu
      * @return
      */
-    @RequestMapping("updsysMenuById")
-    public String updsysMenuById(AoaSysMenu sysMenu){
-        iAoaSysMenuService.updsysMenuById(sysMenu);
+    @RequestMapping("updSysMenuById")
+    public String updSysMenuById(AoaSysMenu sysMenu){
+        iAoaSysMenuService.updSysMenuById(sysMenu);
         return "/sysmanage/menumanage/menumanage";
     }
 

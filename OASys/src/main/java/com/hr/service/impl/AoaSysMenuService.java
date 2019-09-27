@@ -46,18 +46,18 @@ public class AoaSysMenuService implements IAoaSysMenuService {
     }
 
     @Override
-    public void delsysMenuById(Long menuId) {
-        aoaSysMenuMapper.delsysMenuById(menuId);
+    public void delSysMenuById(Long menuId) {
+        aoaSysMenuMapper.delSysMenuById(menuId);
     }
 
     @Override
     @Transactional(propagation = Propagation.SUPPORTS)
-    public AoaSysMenu querysysMenuById(Long menuId) {
-        return aoaSysMenuMapper.querysysMenuById(menuId);
+    public AoaSysMenu querySysMenuById(Long menuId) {
+        return aoaSysMenuMapper.querySysMenuById(menuId);
     }
 
     @Override
-    public void updsysMenuById(AoaSysMenu sysMenu) {
-        aoaSysMenuMapper.updsysMenuById(sysMenu);
+    public void updSysMenuById(AoaSysMenu sysMenu) {
+        aoaSysMenuMapper.updSysMenuById(sysMenu);
     }
 }

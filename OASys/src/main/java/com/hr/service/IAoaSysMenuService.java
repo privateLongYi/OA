@@ -26,12 +26,12 @@ public interface IAoaSysMenuService {
     void saveAoaSysMenu(AoaSysMenu sysMenu);
 
     //根据ID删除系统菜单
-    void delsysMenuById(Long menuId);
+    void delSysMenuById(Long menuId);
 
     //根据ID查询系统菜单
-    AoaSysMenu querysysMenuById(Long menuId);
+    AoaSysMenu querySysMenuById(Long menuId);
 
     //根据ID修改系统菜单
-    void updsysMenuById(AoaSysMenu sysMenu);
+    void updSysMenuById(AoaSysMenu sysMenu);
 
 }
