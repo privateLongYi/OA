@@ -22,7 +22,7 @@
     <result column="dept_name" jdbcType="VARCHAR" property="deptName" />
   </resultMap>
   <select id="queryTask" resultMap="BaseResultMap">
-    select t.type_id,t.title,t.publish_time,u.user_name,d.dept_name,t.status_id,t.is_top
+    select t.task_id,t.type_id,t.title,t.publish_time,u.user_name,d.dept_name,t.status_id,t.is_top
     from
     aoa_task_list t,aoa_user u,aoa_dept d
     <where>
@@ -45,4 +45,31 @@
       AND task_push_user_id=1 and t.task_push_user_id=u.user_id and u.dept_id=d.dept_id
     </where>
   </select>
+
+  <select id="goUpdate" resultMap="BaseResultMap" >
+    select
+    task_id,type_id,status_id,star_time,end_time,title,reciverlist,task_describe,comment,is_top,is_cancel
+    from aoa_task_list
+    where task_id = #{taskId}
+
+  </select>
+
+  <update id="updTaskList">
+    UPDATE aoa_task_list set type_id= #{typeId},status_id= #{statusId},star_time=#{starTime},
+    end_time= #{endTime},title=#{title},reciverlist=#{reciverlist},task_describe=#{taskDescribe},
+    comment=#{comment},is_top=#{isTop},is_cancel=#{isCancel}
+    where task_id=#{taskId}
+  </update>
+
+  <delete id="delTaskList">
+    DELETE FROM aoa_task_list where task_id=#{taskId}
+  </delete>
+
+  <insert id="saveTaskList">
+    INSERT INTO aoa_task_list
+    (type_id,status_id,star_time,end_time,title,reciverlist,task_describe,comment,is_top,is_cancel,task_push_user_id)
+    VALUES
+    (#{typeId},#{statusId},#{starTime},#{endTime},#{title},#{reciverlist},#{taskDescribe},#{comment},#{isTop},#{isCancel},1)
+
+  </insert>
 </mapper>
