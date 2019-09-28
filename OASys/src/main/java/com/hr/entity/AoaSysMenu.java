@@ -7,7 +7,7 @@ public class AoaSysMenu implements Serializable{
 
     private Integer isShow;
 
-    private Integer menuGrade;
+    private String menuGrade;
 
     private String menuIcon;
 
@@ -48,7 +48,7 @@ public class AoaSysMenu implements Serializable{
     public AoaSysMenu() {
     }
 
-    public AoaSysMenu(Long menuId, Integer isShow, Integer menuGrade, String menuIcon,
+    public AoaSysMenu(Long menuId, Integer isShow, String menuGrade, String menuIcon,
                       String menuName, String menuUrl, Long parentId, Integer sortId) {
         this.menuId = menuId;
         this.isShow = isShow;
@@ -100,11 +100,11 @@ public class AoaSysMenu implements Serializable{
         this.isShow = isShow;
     }
 
-    public Integer getMenuGrade() {
+    public String getMenuGrade() {
         return menuGrade;
     }
 
-    public void setMenuGrade(Integer menuGrade) {
+    public void setMenuGrade(String menuGrade) {
         this.menuGrade = menuGrade;
     }
 
