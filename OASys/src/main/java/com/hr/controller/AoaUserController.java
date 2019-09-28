@@ -13,6 +13,7 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import java.net.URI;
 import java.util.ArrayList;
 import java.util.List;
@@ -28,10 +29,14 @@ public class AoaUserController {
     private IAoaSysMenuService iAoaSysMenuService;
 
     @RequestMapping("queryAoaUserByNameAndPwd")
-    public String queryAoaUserByNameAndPwd(String userName, String password, ModelMap map){
+    public String queryAoaUserByNameAndPwd(String userName, String password, ModelMap map, HttpSession session){
         AoaUser user = iAoaUserService.queryAoaUserByNameAndPwd(userName, password);
         if(user != null){
             map.addAttribute("user",user);
+            //加入到session
+            session.setAttribute("user", user);
+            //设置session存活时间
+            session.setMaxInactiveInterval(30*60);
             //查询权限
             List<AoaSysMenu> alllist = iAoaSysMenuService.querySysMenuByRoleId(user.getRoleId(), null);
             List<AoaSysMenu> childlist = getSortData(alllist, new ArrayList<AoaSysMenu>(), 0L);
