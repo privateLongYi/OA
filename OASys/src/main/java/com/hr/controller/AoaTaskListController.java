@@ -111,7 +111,7 @@ public class AoaTaskListController {
     public List<AoaUser> queryUser(ModelMap map, Long deptId, Long roleId){
         List<AoaUser> list = iAoaUserService.queryUser(deptId,roleId);
         map.addAttribute("list",list);
-
+        return list;
     }
 
 
