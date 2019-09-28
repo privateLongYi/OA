@@ -12,6 +12,8 @@ import org.springframework.scheduling.annotation.EnableScheduling;
 @EnableCaching
 public class OasysApplication {
 
+
+
 	public static void main(String[] args) {
 		SpringApplication.run(OasysApplication.class, args);
 	}
