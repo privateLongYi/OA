@@ -27,9 +27,29 @@ public class AoaTaskListService implements IAoaTaskListService{
     }
 
     //根据条件查询总页数
-
     @Override
     public Integer queryTaskByword(String keyword) {
         return aoaTaskListMapper.queryTaskByword(keyword);
+    }
+
+    //单值查询需要修改的数据
+    @Override
+    public AoaTaskList goUpdate(Long taskId) {
+        return aoaTaskListMapper.goUpdate(taskId);
+    }
+
+    @Override
+    public void updTaskList(AoaTaskList taskList) {
+        aoaTaskListMapper.updTaskList(taskList);
+    }
+
+    @Override
+    public void delTaskList(long taskId) {
+        aoaTaskListMapper.delTaskList(taskId);
+    }
+
+    @Override
+    public void saveTaskList(AoaTaskList taskList) {
+        aoaTaskListMapper.saveTaskList(taskList);
     }
 }

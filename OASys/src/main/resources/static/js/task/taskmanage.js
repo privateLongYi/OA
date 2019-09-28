@@ -2,6 +2,26 @@ $(function () {
 
     query(0, 10, "");
 
+    /**
+     * 根据不同的内容，显示不同的颜色
+     */
+    /*$(".change-color").each(function(){
+        var $val=$(this).text();
+        if($val=="新任务"){
+            $(this).addClass("label-warning");
+        }else if($val=="已接收"){
+            $(this).addClass("label-info");
+        }else if($val=="进行中"){
+            $(this).addClass("label-primary");
+        }else if($val=="已提交"){
+            $(this).addClass("label-danger");
+        }
+        else if($val=="已完成"){
+            $(this).addClass("label-success");
+        }
+
+    })*/
+
 })
 
 //搜索
@@ -49,7 +69,19 @@ function query(page, count, keyword){
                         "<td><span>"+data[i].publishTime+"</span></td>" +
                         "<td><span>"+data[i].userName+"</span></td>" +
                         "<td><span>"+data[i].deptName+"</span></td>" +
-                        "<td><span class='label label-primary'>"+data[i].statusId+"</span></td>" +
+                        "<td>";
+                        if(data[i].statusId == 3){
+                            d+= "<span class='label label-primary'>新任务</span>";
+                        }else if(data[i].statusId == 4){
+                            d+= "<span class='label label-primary'>已接受</span>";
+                        }else if(data[i].statusId == 5){
+                            d+= "<span class='label label-primary'>进行中</span>";
+                        }else if(data[i].statusId == 3){
+                            d+= "<span class='label label-primary'>已提交</span>";
+                        }else{
+                            d+= "<span class='label label-primary'>已完成</span>";
+                        }
+                        d+="</td>" +
                         "<td>" +
                         "<span class='labels'> ";
                     if(data[i].isTop == 1){
@@ -60,13 +92,13 @@ function query(page, count, keyword){
                     d+="</span>"+
                         "</td>"+
                         "<td>"+
-                        "<a  href='../../templates/taskmanage/taskedit.html'class='label xiugai'>"+
+                        "<a  href='goUpdate?taskId="+data[i].taskId+"'class='label xiugai'>"+
                         "<span class=\"glyphicon glyphicon-edit\"></span>修改 "+
                         "</a>"+
                         "<a href='tasksee.html?id=51' class='label xiugai'>"+
                         "<span class='glyphicon glyphicon-search'></span> 查看"+
                         "</a>"+
-                        "<a href='javascript:del("+data[i].typeId+");' class='label shanchu'>" +
+                        "<a href='javascript:del("+data[i].taskId+");' class='label shanchu'>" +
                         "<span class='glyphicon glyphicon-remove'></span> 删除"+
                         "</a>"+
                         "</td>" +
@@ -187,7 +219,7 @@ function sel() {
 //删除
 function del(id) {
     if (confirm("确认删除吗？删除的数据将不能再恢复！")){
-        window.location.href="delTypeListByTypeId?typeId="+id;
+        window.location.href="delTaskList?taskId="+id;
     }
 }
 
@@ -207,23 +239,5 @@ $(function(){
 
 
 				
-				/**
-				 * 根据不同的内容，显示不同的颜色
-				 */
-				/*$(".change-color").each(function(){
-					var $val=$(this).text();
-					if($val=="新任务"){
-						$(this).addClass("label-warning");
-					}else if($val=="已接收"){
-						$(this).addClass("label-info");
-					}else if($val=="进行中"){
-						$(this).addClass("label-primary");
-					}else if($val=="已提交"){
-						$(this).addClass("label-danger");
-					}
-					else if($val=="已完成"){
-						$(this).addClass("label-success");
-					}
-					
-				})*/
+
 			})

@@ -2,6 +2,7 @@ package com.hr.controller;
 
 import com.hr.entity.AoaTaskList;
 import com.hr.entity.AoaUser;
+import com.hr.mapper.AoaTaskListMapper;
 import com.hr.service.IAoaTaskListService;
 import com.hr.service.IAoaUserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -55,7 +56,55 @@ public class AoaTaskListController {
         return iAoaTaskListService.queryTaskByword(keyword);
     }
 
+    /**
+     * 单值查询需要修改的数据
+     * @param map
+     * @param taskId
+     * @return
+     */
+    @RequestMapping("goUpdate")
+    public String goUpdate(ModelMap map,Long taskId){
+        AoaTaskList taskList = iAoaTaskListService.goUpdate(taskId);
 
+        map.addAttribute("taskList",taskList);
+
+        return "/taskmanage/taskmanage/taskedit";
+
+    }
+    /**
+     * 根据ID修改发布任务
+     * @param map
+     * @param taskList
+     * @return
+     */
+    @RequestMapping("updTaskList")
+    public String updTaskList(ModelMap map, AoaTaskList taskList){
+        iAoaTaskListService.updTaskList(taskList);
+        //System.out.println(taskList.getTaskId()+"+"+taskList.getTypeId()+"+"+taskList.getTitle()+"+"+taskList.getTaskDescribe()+"+"+taskList.getIsTop()+"+"+taskList.getIsCancel());
+        return "/taskmanage/taskmanage/taskmanage";
+    }
+
+    /**
+     * 根据ID删除发布任务
+     * @param taskId
+     * @return
+     */
+    @RequestMapping("delTaskList")
+    public String delTaskList(Long taskId){
+        iAoaTaskListService.delTaskList(taskId);
+        return "/taskmanage/taskmanage/taskmanage";
+    }
+
+    /**
+     * 新增一条发布任务
+     * @param taskList
+     * @return
+     */
+    @RequestMapping("saveTaskList")
+    public String saveTaskList(AoaTaskList taskList){
+        iAoaTaskListService.saveTaskList(taskList);
+        return "/taskmanage/taskmanage/taskmanage";
+    }
 
     //接收人的选择
     @RequestMapping("queryUser")
@@ -64,5 +113,7 @@ public class AoaTaskListController {
         map.addAttribute("list",list);
         return list;
     }
+
+
 
 }

@@ -1,5 +1,4 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http:/www.thymeleaf.org">
 <head>
 	<meta charset="UTF-8">
 
@@ -59,7 +58,7 @@ a:hover {
 			</div>
 			
 			<!--盒子身体-->
-			<form action="ck_addtask" method="post" onsubmit="return check();">
+			<form action="../../taskList/saveTaskList" method="post" onsubmit="return check();">
 			<div class="box-body no-padding">
 				<div class="box-body">
 						<!--錯誤信息提示  -->
@@ -80,10 +79,6 @@ a:hover {
 							<label class="control-label">状态</label> 
 							<select class="form-control" name="statusId">
 							     <option value="3">新任务</option>
-							     <option value="4">已接收</option>
-							     <option value="5">进行中</option>
-							     <option value="6">已提交</option>
-							     <option value="7">已完成</option>
 							</select>
 						</div>
 						<div class="col-md-6 form-group">
@@ -118,12 +113,21 @@ a:hover {
 						</div>
 						<div class="col-md-6 form-group ">
 							<label class="control-label">置顶</label> <br /> 
-							<span class="labels"><label><input type="checkbox" name="top" class="val" ><i>✓</i></label></span>
+							<span class="labels"><label>
+								<input  type="checkbox" name="isTop" class="val"  value="1"
+										onclick="javascript:document.getElementById('isTop').value=this.checked;"><i>✓</i>
+								<input type="hidden" name="isTop" id="isTop1" value="0">
+							</label></span>
 						</div>
 
 						<div class="col-md-6  form-group"> 
 							<label class="control-label">取消</label> <br /> <span
-								class="labels"><label><input type="checkbox" name="cancel" class="val"><i>✓</i></label></span>
+								class="labels"><label>
+							<input  type="checkbox" name="isCancel" class="val"  value="1"
+									onclick="javascript:document.getElementById('isCancel').value=this.checked;" ><i>✓</i>
+							<input type="hidden" name="isCancel" id="isCancel" value="0">
+						</label>
+						</span>
 						</div>
 					</div>
 				</div>

@@ -1,13 +1,16 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+	<meta charset="UTF-8">
 
-
-<link rel="stylesheet" href="../../../static/bootstrap/css/bootstrap.min.css" />
-<script type="text/javascript" src="../../../static/easyui/jquery.min.js"></script>
-<script type="text/javascript" src="../../../static/bootstrap/js/bootstrap.min.js"></script>
-<link rel="stylesheet" type="text/css" href="../../../static/css/common/box.css" />
-<link rel="stylesheet" type="text/css" href="../../../static/css/common/checkbox.css" />
-<link rel="stylesheet" type="text/css" href="../../../static/css/common/checkbox.css" />
-<link rel="stylesheet" href="../../../static/css/common/tanchuang.css" />
-<script type="text/javascript" src="../../../static/js/task/task.js" ></script>
+<link rel="stylesheet" th:href="@{/bootstrap/css/bootstrap.min.css}" />
+<script type="text/javascript" th:src="@{/easyui/jquery.min.js}"></script>
+<script type="text/javascript" th:src="@{/bootstrap/js/bootstrap.min.js}"></script>
+<link rel="stylesheet" type="text/css" th:href="@{/css/common/box.css}" />
+<link rel="stylesheet" type="text/css" th:href="@{/css/common/checkbox.css}" />
+<link rel="stylesheet" type="text/css" th:href="@{/css/common/checkbox.css}" />
+<link rel="stylesheet" th:href="@{/css/common/tanchuang.css}" />
+<script type="text/javascript" th:src="@{/js/task/task.js}" ></script>
 <style type="text/css">
 a {
 	color: black;
@@ -36,6 +39,8 @@ a:hover {
 	})
 
 </script>
+</head>
+<body>
 <div class="row" style="padding-top: 10px;">
 	<div class="col-md-2">
 		<h1 style="font-size: 24px; margin: 0;" class="">任务管理</h1>
@@ -59,16 +64,17 @@ a:hover {
 				</h3>
 			</div>
 			<!--盒子身体-->
-			<form action="update" method="post">
+			<form action="updTaskList" method="post">
 			<div class="box-body no-padding">
 				<div class="box-body">
 					<div class="row">
 					
 						<div class="col-md-6 form-group">
+							<input type="hidden" name="taskId" th:value="${taskList.taskId}">
 							<label class="control-label"> <span>类型</span></label>
 							 <select class="form-control" name="typeId">
-								<option value="3">公事</option>
-								<option value="4">私事</option>
+								 <option th:selected="${taskList.typeId == 3}" value="3">公事</option>
+								 <option th:selected="${taskList.typeId == 4}" value="4">私事</option>
 							</select>
 						</div>
 						<div class="col-md-6 form-group">
@@ -80,20 +86,20 @@ a:hover {
 						</div>
 						<div class="col-md-6 form-group">
 							<label class="control-label">开始日期</label> <input id="starTime" name="starTime"
-								class="form-control"  value="2019-1-10 11:50:42"/>
+								class="form-control"  th:value="${taskList.starTime}"/>
 						</div>
 						<div class="col-md-6 form-group">
 							<label class="control-label">结束日期</label> <input id="endTime" name="endTime"
-								class="form-control" value="2019-1-11 11:50:42"/>
+								class="form-control" th:value="${taskList.endTime}"/>
 						</div>
 						<div class="col-md-6 form-group">
 
 							<label class="control-label">标题</label> <input name="title"
-								type="text" id="title_Name" class="form-control" value="统计报表"/>
+								type="text" id="title_Name" class="form-control" th:value="${taskList.title}"/>
 						</div>
 						<div class="col-md-6 form-group" style="position: relative;">
 							<label class="control-label" data-toggle="modal" data-target="#myModal">接收人</label>
-							 <input name="reciverlist" type="text" id="recive_list" value="甄姬2;Jack"
+							 <input name="reciverlist" type="text" id="recive_list" th:value="${taskList.reciverlist}"
 								class="form-control " readonly="readonly"  style="background-color:#fff;"/>
 							<div class="reciver">
 								<span class="label label-success glyphicon glyphicon-plus"
@@ -102,28 +108,43 @@ a:hover {
 						</div>
 						<div class="col-md-6 form-group">
 							<label class="control-label">描述</label>
-							<textarea class="form-control text" name="taskDescribe" >统计报表</textarea>
+							<textarea class="form-control text" name="taskDescribe" th:text="${taskList.taskDescribe}"></textarea>
 						</div>
 						<div class="col-md-6 form-group">
 							<label class="control-label">评价</label>
-							<textarea class="form-control text" name="comment" ></textarea>
+							<textarea class="form-control text" name="comment" th:text="${taskList.comment}"></textarea>
 						</div>
 						<div class="col-md-6 form-group ">
 							<label class="control-label">置顶</label> <br /> 
-									<span class="labels">
+									<span class="labels" th:if="${taskList.isTop}==1">
 									<label>
-									   <input type="checkbox" name="top" class="val" checked><i>✓</i>
+									     <input  type="checkbox" name="isTop" class="val"  value="1"
+												 onclick="javascript:document.getElementById('isTop').value=this.checked;" checked><i>✓</i>
+										<input type="hidden" name="isTop" id="isTop2" value="0">
+									 </label></span>
+							<span class="labels" th:if="${taskList.isTop}!=1">
+									<label>
+										 <input  type="checkbox" name="isTop" class="val"  value="1"
+												 onclick="javascript:document.getElementById('isTop').value=this.checked;"><i>✓</i>
+										<input type="hidden" name="isTop" id="isTop1" value="0">
 									 </label></span>
 						</div>
 
 						<div class="col-md-6  form-group"> 
 							<label class="control-label">取消</label> <br />
-									 <span class="labels">
+									 <span class="labels" th:if="${taskList.isCancel==1}">
 										<label>
-										   <input type="checkbox" name="cancel" class="val"><i>✓</i>
+											<input  type="checkbox" name="isCancel" class="val"  value="1"
+													onclick="javascript:document.getElementById('isCancel').value=this.checked;" checked><i>✓</i>
+											<input type="hidden" name="isCancel" id="isCancel2" value="0">
+											 </label></span>
+							         <span class="labels" th:if="${taskList.isCancel!=1}">
+										<label>
+											<input  type="checkbox" name="isCancel" class="val"  value="1"
+													onclick="javascript:document.getElementById('isCancel').value=this.checked;" ><i>✓</i>
+											<input type="hidden" name="isCancel" id="isCancel" value="0">
 											 </label></span>
 						</div>
-						<input name="taskId" type="text" style="display:none;"value="51">
 					</div>
 				</div>
 			</div>
@@ -198,7 +219,7 @@ a:hover {
 											</tr>
 										</thead>
 										<tbody>
-																						<tr class="row">
+										<tr class="row">
 												<td class=" col-xs-1">
 													<span class="labels"><label><input name="id" type="checkbox"><i>✓</i></label></span>
 												</td>
@@ -214,151 +235,6 @@ a:hover {
 												<td class="col-xs-2 na">甄姬2</td>
 												<td class=" col-xs-2">程序员</td>
 												<td class=" col-xs-2">13117336954</td>
-
-											</tr>
-											<tr class="row">
-												<td class=" col-xs-1">
-													<span class="labels"><label><input name="id" type="checkbox"><i>✓</i></label></span>
-												</td>
-												<td class=" col-xs-1">
-													<span class="imgs center-block">
-														<img style="width: 30px;height: 30px;"
-															class="profile-user-img img-responsive img-circle"
-															src="/image/twoman.jpeg" />
-															</span>
-												</td>
-												<td class="col-xs-2">研发部</td>
-												<td class=" col-xs-2">小花 </td>
-												<td class="col-xs-2 na">甄嬛</td>
-												<td class=" col-xs-2">初级工程师</td>
-												<td class=" col-xs-2">13034507214</td>
-
-											</tr>
-											<tr class="row">
-												<td class=" col-xs-1">
-													<span class="labels"><label><input name="id" type="checkbox"><i>✓</i></label></span>
-												</td>
-												<td class=" col-xs-1">
-													<span class="imgs center-block">
-														<img style="width: 30px;height: 30px;"
-															class="profile-user-img img-responsive img-circle"
-															src="/image/handsome.JPG" />
-															</span>
-												</td>
-												<td class="col-xs-2">研发部</td>
-												<td class=" col-xs-2">花红 </td>
-												<td class="col-xs-2 na">无双</td>
-												<td class=" col-xs-2">中级工程师</td>
-												<td class=" col-xs-2">13117336954</td>
-
-											</tr>
-											<tr class="row">
-												<td class=" col-xs-1">
-													<span class="labels"><label><input name="id" type="checkbox"><i>✓</i></label></span>
-												</td>
-												<td class=" col-xs-1">
-													<span class="imgs center-block">
-														<img style="width: 30px;height: 30px;"
-															class="profile-user-img img-responsive img-circle"
-															src="/image/threeman.jpeg" />
-															</span>
-												</td>
-												<td class="col-xs-2">研发部</td>
-												<td class=" col-xs-2">兰瑞 </td>
-												<td class="col-xs-2 na">瑞王</td>
-												<td class=" col-xs-2">高级工程师</td>
-												<td class=" col-xs-2">13117336953</td>
-
-											</tr>
-											<tr class="row">
-												<td class=" col-xs-1">
-													<span class="labels"><label><input name="id" type="checkbox"><i>✓</i></label></span>
-												</td>
-												<td class=" col-xs-1">
-													<span class="imgs center-block">
-														<img style="width: 30px;height: 30px;"
-															class="profile-user-img img-responsive img-circle"
-															src="/image/fiveman.jpeg" />
-															</span>
-												</td>
-												<td class="col-xs-2">研发部</td>
-												<td class=" col-xs-2">雨果 </td>
-												<td class="col-xs-2 na">丹琪</td>
-												<td class=" col-xs-2">系统架构师</td>
-												<td class=" col-xs-2">13117336953</td>
-
-											</tr>
-											<tr class="row">
-												<td class=" col-xs-1">
-													<span class="labels"><label><input name="id" type="checkbox"><i>✓</i></label></span>
-												</td>
-												<td class=" col-xs-1">
-													<span class="imgs center-block">
-														<img style="width: 30px;height: 30px;"
-															class="profile-user-img img-responsive img-circle"
-															src="/image/fourman.jpeg" />
-															</span>
-												</td>
-												<td class="col-xs-2">研发部</td>
-												<td class=" col-xs-2">毛羽 </td>
-												<td class="col-xs-2 na">于彤</td>
-												<td class=" col-xs-2">需求分析师</td>
-												<td class=" col-xs-2">13117336954</td>
-
-											</tr>
-											<tr class="row">
-												<td class=" col-xs-1">
-													<span class="labels"><label><input name="id" type="checkbox"><i>✓</i></label></span>
-												</td>
-												<td class=" col-xs-1">
-													<span class="imgs center-block">
-														<img style="width: 30px;height: 30px;"
-															class="profile-user-img img-responsive img-circle"
-															src="/image/fourman.jpeg" />
-															</span>
-												</td>
-												<td class="col-xs-2">研发部</td>
-												<td class=" col-xs-2">薛之谦 </td>
-												<td class="col-xs-2 na">上上签</td>
-												<td class=" col-xs-2">程序员</td>
-												<td class=" col-xs-2">18868688866</td>
-
-											</tr>
-											<tr class="row">
-												<td class=" col-xs-1">
-													<span class="labels"><label><input name="id" type="checkbox"><i>✓</i></label></span>
-												</td>
-												<td class=" col-xs-1">
-													<span class="imgs center-block">
-														<img style="width: 30px;height: 30px;"
-															class="profile-user-img img-responsive img-circle"
-															src="/image//13d40692-c304-4493-a59b-d95b55680364.jpg" />
-															</span>
-												</td>
-												<td class="col-xs-2">研发部</td>
-												<td class=" col-xs-2">杰克 </td>
-												<td class="col-xs-2 na">Jack</td>
-												<td class=" col-xs-2">程序员</td>
-												<td class=" col-xs-2">13548731822</td>
-
-											</tr>
-											<tr class="row">
-												<td class=" col-xs-1">
-													<span class="labels"><label><input name="id" type="checkbox"><i>✓</i></label></span>
-												</td>
-												<td class=" col-xs-1">
-													<span class="imgs center-block">
-														<img style="width: 30px;height: 30px;"
-                                                             class="profile-user-img img-responsive img-circle"
-                                                             src="../../../static/images/timg.jpg" alt="images"/>
-														
-															</span>
-												</td>
-												<td class="col-xs-2">研发部</td>
-												<td class=" col-xs-2">张三 </td>
-												<td class="col-xs-2 na">测试小张</td>
-												<td class=" col-xs-2">程序员</td>
-												<td class=" col-xs-2">13548731822</td>
 
 											</tr>
 											</tbody>
@@ -458,11 +334,11 @@ a:hover {
 </script>
 									</div>
 								</div>
-
 							</div>
 						</div>
 					</div>
 				</div>
+<!-- 弹窗结尾 -->
 				<h2 class="mi" style="display:none;">任务</h2>
 <script>
 $(function(){
@@ -515,5 +391,7 @@ function addvalue2(){
 	
 }
 </script>			
-<script type="text/javascript" src="../../../static/js/common/data.js"></script>
-<script type="text/javascript" src="../../../static/plugins/My97DatePicker/WdatePicker.js"></script>
+<script type="text/javascript"th:src="@{/js/common/data.js}"></script>
+<script type="text/javascript" th:src="@{/plugins/My97DatePicker/WdatePicker.js}"></script>
+</body>
+</html>
